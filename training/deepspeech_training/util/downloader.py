@@ -19,7 +19,8 @@ def maybe_download(archive_name, target_dir, archive_url):
         total_size = int(req.headers.get('content-length', 0))
         done = 0
         with open(archive_path, 'wb') as f:
-            bar = progressbar.ProgressBar(max_value=total_size, widgets=SIMPLE_BAR)
+            bar = progressbar.ProgressBar(maxval=total_size, widgets=SIMPLE_BAR)
+            bar.start()
             for data in req.iter_content(1024*1024):
                 done += len(data)
                 f.write(data)
